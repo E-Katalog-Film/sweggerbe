@@ -17,62 +17,7 @@ externalDocs:
   url: https://pkg.go.dev/github.com/Fancypedia/fancybackenddd
 servers:
   - url: https://asia-southeast2-core-advice-401502.cloudfunctions.net
-tags:
-  - name: Login User
-    description: Login User
 paths:
-  /getallcomment:
-    get:
-      tags:
-        - Data Grafik Admin
-      summary: Get Data all comment
-      description: Get Data all comment
-      operationId: Getcomment
-      responses:
-        '200':
-          description: successful operation comment
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CretaeCOmment'
-        '400':
-          description: Invalid status value
-  /getallproduct:
-    get:
-      tags:
-        - Data Grafik Admin
-      summary: Get Data all Product
-      description: Get Data all Product
-      operationId: getProduct
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/CreateProduct'
-        '400':
-          description: Invalid status value
-  /getallblog:
-    get:
-      tags:
-        - Data Grafik Admin
-      summary: Get Data all Blog
-      description: Get Data all Blog
-      operationId: Get Blog
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/blogfix'
-        '400':
-          description: Invalid status value
   /createaccount:
     post:
       tags:
@@ -157,9 +102,445 @@ paths:
         '400':
           description: Invalid input or request body
       security:
-        - token: []             
+        - token: []
+  /deleteaccount:
+    delete:
+      tags:
+        - USER
+      summary: delete account
+      description: delete account
+      operationId: delete account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createaccount' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createaccount'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  /updateaccount:
+    patch:
+      tags:
+        - USER
+      summary: update account
+      description: update account
+      operationId: update account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createaccount' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createaccount'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  /createfilm:
+    post:
+      tags:
+        - FILM
+      summary: create film
+      description: create film
+      operationId: create film
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Createfilm' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Createfilm'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  /updatedfilm:
+    patch:
+      tags:
+        - FILM
+      summary: update film
+      description: update film
+      operationId: update film
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Createfilm' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Createfilm'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  /deletefilm:
+    delete:
+      tags:
+        - FILM
+      summary: delete film
+      description: delete film
+      operationId: delete film
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Createfilm' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Createfilm'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  /getallfilm:
+    get:
+      tags:
+        - FILM
+      summary: GET FILM
+      description: GET FILM
+      operationId: GET FILM
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createaccount'
+        '405':
+          description: Invalid input
+      security:
+        - token: []
+  /createkomentator:
+    post:
+      tags:
+        - KOMENTAR
+      summary: CREATE KOMENTATOR
+      description: CREATE KOMENTATOR
+      operationId: CREATE KOMENTATOR
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKomentar' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateKomentar'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  /updatedkomentator:
+    patch:
+      tags:
+        - KOMENTAR
+      summary: UPDATE KOMENTATOR
+      description: UPDATE KOMENTATOR
+      operationId: UPDATE KOMENTATOR
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKomentar' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateKomentar'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  /deletekomentator:
+    delete:
+      tags:
+        - KOMENTAR
+      summary: DELETE KOMENTATOR
+      description: DELETE KOMENTATOR
+      operationId: DELETE KOMENTATOR
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKomentar' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateKomentar'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  /getallkomentator:
+    get:
+      tags:
+        - KOMENTAR
+      summary: get account
+      description: get account
+      operationId: get account
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateKomentar'
+        '405':
+          description: Invalid input
+      security:
+        - token: []
+  /createrating:
+    post:
+      tags:
+        - RATING
+      summary: CREATE RATING
+      description: CREATE RATING
+      operationId: CREATE RATING
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRating' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateRating'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  /updatedrating:
+    patch:
+      tags:
+        - RATING
+      summary: UPDATE RATING
+      description: UPDATE RATING
+      operationId: UPDATE RATING
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRating' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateRating'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  /deleterating:
+    delete:
+      tags:
+        - RATING
+      summary: DELETE RATING
+      description: DELETE RATING
+      operationId: DELETE RATING
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRating' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateRating'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  /getallrating:
+    get:
+      tags:
+        - RATING
+      summary: GET RATING
+      description: GET RATING
+      operationId: GET RATING
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRating'
+        '405':
+          description: Invalid input
+      security:
+        - token: []          
 components:
-  schemas:
+  schemas: 
+    CreateRating:
+      type: object
+      required:
+        - ID
+        - ID_Film
+        - Username
+        - Rating
+        - Kualitas
+        - Note
+        - Tanggal
+      properties:
+        ID:
+          type: string
+          description: ID
+        ID_Film:
+          type: string
+          description: ID_Film
+        Username:
+          type: string
+          description: Username
+        Rating:
+          type: string
+          description: Rating
+        Kualitas:
+          type: string
+          description: Kualitas
+        Note:
+          type: string
+          description: Note
+        Tanggal:
+          type: string
+          description: Tanggal
+    CreateKomentar:
+      type: object
+      required:
+        - ID
+        - ID_Film
+        - Name
+        - Tanggal
+        - Komentar
+      properties:
+        ID:
+          type: string
+          description: ID
+        ID_Film:
+          type: string
+          description: ID_Film
+        Name:
+          type: string
+          description: Name
+        Tanggal:
+          type: string
+          description: Tanggal
+        Komentar:
+          type: string
+          description: Komentar
+    Createfilm:
+      type: object
+      required:
+        - ID
+        - Judul
+        - Image
+        - Tanggal
+        - Genre
+        - Sinopsis
+        - Penulis
+        - Sutradara
+        - Aktor
+      properties:
+        ID:
+          type: string
+          description: ID
+        Judul:
+          type: string
+          description: Judul
+        Image:
+          type: string
+          description: Image
+        Tanggal:
+          type: string
+          description: Tanggal
+        Genre:
+          type: string
+          description: Genre
+        Sinopsis:
+          type: string
+          description: Sinopsis
+        Penulis:
+          type: string
+          description: Penulis
+        Sutradara:
+          type: string
+          description: Sutradara
+        Aktor:
+          type: string
+          description: Aktor
     GetToken:
       type: object
       required:
