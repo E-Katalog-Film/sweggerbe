@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: DOKUMEN API FANCY BACKEND BY RAUL MAHYA - OpenAPI 3.0
+  title: DOKUMEN API E-KATALOG MOBILE - OpenAPI 3.0
   description: >-
     Jelaskan disini apa saja yang perlu dijelaskan
     termasuk informasi yang diperlukan untuk dinilai
@@ -9,14 +9,14 @@ info:
   contact:
     email: raulmahya11@gmail.com
   license:
-    name: Fancy Backend
+    name: E-KATALOG MOBILE
     url: https://pkg.go.dev/github.com/Fancypedia/fancybackenddd
   version: 1.0.11
 externalDocs:
   description: Repo GCF
   url: https://pkg.go.dev/github.com/Fancypedia/fancybackenddd
 servers:
-  - url: https://asia-southeast2-testlogin-366704.cloudfunctions.net
+  - url: https://asia-southeast2-core-advice-401502.cloudfunctions.net
 tags:
   - name: Login User
     description: Login User
@@ -73,80 +73,41 @@ paths:
                   $ref: '#/components/schemas/blogfix'
         '400':
           description: Invalid status value
-  /loginbaru:
+  /createaccount:
     post:
       tags:
-        - ADMIN
-      summary: Login get Token for Create Product,Blog,Comment
-      description: Login and Get User Token
-      operationId: authService
+        - USER
+      summary: create account
+      description: create account
+      operationId: create account
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Auth'
+              $ref: '#/components/schemas/createaccount'
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuthResponse'
+                $ref: '#/components/schemas/createaccount'
         '405':
           description: Invalid input
-  /createacountfix:
-    post:
-      tags:
-        - Login User
-      summary: Create Account
-      description: Create Account
-      operationId: CreateAccount Service
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateAccount'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateAccount'
-        '405':
-          description: Invalid input
-  /login-4:
+  /getallaccount:
     get:
       tags:
-        - Login User
-      summary: Get username using token
-      description: Get User
-      operationId: Get User
+        - USER
+      summary: get account
+      description: get account
+      operationId: get account
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tokenuser'
-        '405':
-          description: Invalid input
-      security:
-        - token: []
-  /login-5:
-    get:
-      tags:
-        - ADMIN
-      summary: Get admin using token
-      description: Get admin
-      operationId: Get admin
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/tokenuser'
+                $ref: '#/components/schemas/createaccount'
         '405':
           description: Invalid input
       security:
@@ -154,10 +115,10 @@ paths:
   /login:
     post:
       tags:
-        - Login User
-      summary: login user
-      description: login user
-      operationId: login user
+        - USER
+      summary: Login User
+      description: Login User
+      operationId: Login User
       requestBody:
         required: true
         content:
@@ -170,201 +131,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Auth'
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuthResponse'
         '400':
           description: Invalid input or request body
-  /createproductfix:
+      security:
+        - token: []
+  /getoken-login:
     post:
       tags:
-        - Product
-      summary: Create Product Data
-      description: Add new Product data
-      operationId: create Product
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateProduct' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/CreateProduct'
-        '400':
-          description: Invalid input or request body
-      security:
-        - token: []
-  /updateproductt:
-    patch:
-      tags:
-        - Product
-      summary: Updated Product Data berdasarkan nomor id
-      description: Updated Product data
-      operationId: Updated Product
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/product' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/CreateProduct'
-        '400':
-          description: Invalid input or request body
-      security:
-        - token: []
-  /deleteproductt:
-    delete:
-      tags:
-        - Product
-      summary: delete Product Data berdasarkan nomor id
-      description: delete Product data
-      operationId: delete Product
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeleteProduct' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/CreateProduct'
-        '400':
-          description: Invalid input or request body
-      security:
-        - token: []
-  # /createcontent-1:
-  #   post:
-  #     tags:
-  #       - Content
-  #     summary: Create Content Data
-  #     description: Add new Content data
-  #     operationId: create Content
-  #     requestBody:
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: '#/components/schemas/content' # Gunakan skema yang sesuai di sini
-  #     responses:
-  #       '200':
-  #         description: successful operation
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 $ref: '#/components/schemas/content'
-  #       '400':
-  #         description: Invalid input or request body
-  #     security:
-  #       - token: []
-  # /updatecontentt:
-  #   patch:
-  #     tags:
-  #       - Content
-  #     summary: Update Content Data
-  #     description: Update Content data
-  #     operationId: Update Content
-  #     requestBody:
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: '#/components/schemas/content' # Gunakan skema yang sesuai di sini
-  #     responses:
-  #       '200':
-  #         description: successful operation
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 $ref: '#/components/schemas/content'
-  #       '400':
-  #         description: Invalid input or request body
-  #     security:
-  #       - token: []
-  # /deletecontentt:
-  #   delete:
-  #     tags:
-  #       - Content
-  #     summary: delete Content Data berdasarkan nomor id
-  #     description: delete Content data
-  #     operationId: delete Content
-  #     requestBody:
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: '#/components/schemas/DeleteContent' # Gunakan skema yang sesuai di sini
-  #     responses:
-  #       '200':
-  #         description: successful operation
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 $ref: '#/components/schemas/content'
-  #       '400':
-  #         description: Invalid input or request body
-  #     security:
-  #       - token: []
-  # /deleteeventgloball:
-  #   delete:
-  #     tags:
-  #       - Event Global
-  #     summary: delete Event Global Data berdasarkan nomor id
-  #     description: delete Event Global data
-  #     operationId: delete Event Global
-  #     requestBody:
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: '#/components/schemas/DeleteEventGlobal' # Gunakan skema yang sesuai di sini
-  #     responses:
-  #       '200':
-  #         description: successful operation
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 $ref: '#/components/schemas/EventGlobal'
-  #       '400':
-  #         description: Invalid input or request body
-  #     security:
-  #       - token: []
-  /deletecomment-1:
-    delete:
-      tags:
-        - Comment
-      summary: delete Comment Data berdasarkan nomor id
-      description: delete Comment data
-      operationId: delete Comment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeleteComment' # Gunakan skema yang sesuai di sini
+        - USER
+      summary: Get Token Login
+      description: Get Token Login
+      operationId: Get Token Login
       responses:
         '200':
           description: successful operation
@@ -373,745 +153,87 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CretaeCOmment'
+                  $ref: '#/components/schemas/GetToken'
         '400':
           description: Invalid input or request body
       security:
-        - token: []
-  /deleteblogg:
-    delete:
-      tags:
-        - Blog
-      summary: delete Comment Data berdasarkan nomor id
-      description: delete Comment data
-      operationId: delete Comment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/blogdelete' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/blogfix'
-        '400':
-          description: Invalid input or request body
-      security:
-        - token: []
-  /createcommentt:
-    post:
-      tags:
-        - Comment
-      summary: Create Comment Data
-      description: Create Comment data
-      operationId: Create Comment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CretaeCOmment' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CretaeCOmment'
-        '400':
-          description: Invalid input or request body
-      security:
-        - token: []
-  /createblogg:
-    post:
-      tags:
-        - Blog
-      summary: Create Comment Data
-      description: Create Comment data
-      operationId: Create Comment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/blogfix' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/blogfix'
-        '400':
-          description: Invalid input or request body
-      security:
-        - token: []
-  # /createeventglobal:
-  #   post:
-  #     tags:
-  #       - Event Global
-  #     summary: Create Event Global Data
-  #     description: Create Event Global data
-  #     operationId: Create Event Global
-  #     requestBody:
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: '#/components/schemas/EventGlobal' # Gunakan skema yang sesuai di sini
-  #     responses:
-  #       '200':
-  #         description: successful operation
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: '#/components/schemas/EventGlobal'
-  #       '400':
-  #         description: Invalid input or request body
-  #     security:
-  #       - token: []
-  /upadateblog-1:
-    patch:
-      tags:
-        - Blog
-      summary: Update Comment Data berdasarkan nomor id
-      description: Update Comment data
-      operationId: Update Comment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/blogfix' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/blogfix'
-        '400':
-          description: Invalid input or request body
-      security:
-        - token: []
-  /updatecommentt:
-    patch:
-      tags:
-        - Comment
-      summary: Update Comment Data berdasarkan nomor id
-      description: Update Comment data
-      operationId: Update Comment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CretaeCOmment' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CretaeCOmment'
-        '400':
-          description: Invalid input or request body
-      security:
-        - token: []
-  # /updateeventgloball:
-  #   patch:
-  #     tags:
-  #       - Event Global
-  #     summary: Update Comment Data berdasarkan nomor id
-  #     description: Update Comment data
-  #     operationId: Update Comment
-  #     requestBody:
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: '#/components/schemas/EventGlobal' # Gunakan skema yang sesuai di sini
-  #     responses:
-  #       '200':
-  #         description: Success Update Event Global
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: '#/components/schemas/EventGlobal'
-  #       '400':
-  #         description: Invalid input or request body
-  #     security:
-  #       - token: []                
+        - token: []             
 components:
   schemas:
-    Peta:
+    GetToken:
       type: object
-      properties:
-        type:
-          type: string
-        geometry:
-          type: object
-          properties:
-            type: 
-              type: string
-            coordinates: 
-              type: array
-        properties:
-          type: object
-          properties:
-            name:
-              type: string
-#               {
-# "ID":7777777,
-# "Username":"mahya",
-# "comment":"ads",
-# "Questions":"easd",
-# "Tanggal":"23112",
-# "Status":false
-# }
-    CretaeCOmment:
-      type: object
-      properties:
-        ID:
-          type: int
-          example: 123
-        Username:
-          type: string
-          example: udin123
-        Comment:
-          type: string
-          example: kamu knp?
-        Answer:
-          type: string
-          example: aku gpp
-        Question:
-          type: string
-          example: aku laper
-        Tanggal:
-          type: string
-          example: "23-09-32"
-        Status:
-          type: bool
-          example: true
-    CreateProduct:
-      type: object
-      properties:
-        Nomorid:
-          type: int
-          example: 123
-        Name:
-          type: string
-          example: udin123
-        Description:
-          type: string
-          example: kamu knp?
-        Price:
-          type: int
-          example: 123
-        Size:
-          type: string
-          example: aku laper
-        Stock:
-          type: int
-          example: 123
-        Image:
-          type: string
-          example: aku laper
-        Status:
-          type: bool
-          example: true
-    Auth:
-      type: object
-      properties:
-        username:
-          type: string
-          example: raull
-        password:
-          type: string
-          example: ganteng
-    CreateAccount:
-      type: object
-      properties:
-        username:
-          type: string
-          example: contoh
-        password:
-          type: string
-          example: contoh
-        no_whatsapp:
-          type: string
-          example: 62881023806530
-    EventGlobal:
-      type: object
-      properties:
-        id:
-          type: int
-          example: 123
-        Title:
-          type: string
-          example: udin123
-        Description:
-          type: string
-          example: kamu knp?
-        Tanggal:
-          type: string
-          example: aku laper
-        Image:
-          type: string
-          example: aku laper
-        Harga:
-          type: int
-          example: 123
-        Content:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: int
-                example: 123
-              Content:
-                type: string
-                example: udin123
-              Image:
-                type: string
-                example: kamu knp?
-              Description:
-                type: string
-                example: aku laper
-              status:
-                type: bool
-                example: true
-        Product:
-          type: array
-          items:
-            type: object
-            properties:
-              Nomorid:
-                type: int
-                example: 123
-              Name:
-                type: string
-                example: udin123
-              Description:
-                type: string
-                example: kamu knp?
-              Price:
-                type: int
-                example: 123
-              Size:
-                type: string
-                example: aku laper
-              Stock:
-                type: int
-                example: 123
-              Image:
-                type: string
-                example: aku laper
-              status:
-                type: bool
-                example: true
-        Status:
-          type: bool
-          example: true
-      Title: string
-      Description: string
-      Tanggal: string
-      Image: string
-      Harga: number
-      Content:
-        - id: number
-          Content: string
-          Image: string
-          Description: string
-          status: boolean
-      Product:
-        - Nomorid: number
-          Name: string
-          Description: string
-          Price: number
-          Size: string
-          Stock: number
-          Image: string
-          status: boolean
-      Status: boolean
-    blogfix:
-      type: object
-      properties:
-        id:
-          type: int
-          example: 123
-        content_one:
-          type: string
-          example: udin123
-        Content_two:
-          type: string
-          example: kamu knp?
-        Image:
-          type: string
-          example: aku laper
-        Title:
-          type: string
-          example: aku laper
-        Title_two:
-          type: string
-          example: aku laper
-        Description:
-          type: string
-          example: aku laper
-        description_two:
-          type: string
-          example: aku laper
-        description_3:
-          type: string
-          example: aku laper
-        status:
-          type: bool
-          example: true
-      content_one: string
-      Content_two: string
-      Image: string
-      Title: string
-      Title_two: string
-      Description: string
-      description_two: string
-      description_3: string
-      status: boolean
-    blogdelete:
-      type: object
-      properties:
-        id:
-          type: int
-          example: 123
-    event:
-      type: object
-      properties:
-        id:
-          type: int
-          example: 123
-        Title:
-          type: string
-          example: udin123
-        Description:
-          type: string
-          example: kamu knp?
-        Tanggal:
-          type: string
-          example: aku laper
-        Image:
-          type: string
-          example: aku laper
-        Harga:
-          type: int
-          example: 123
-        LinkYoutube:
-          type: string
-          example: 123
-        Content:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: int
-                example: 123
-              Content:
-                type: string
-                example: udin123
-              Image:
-                type: string
-                example: kamu knp?
-              Description:
-                type: string
-                example: aku laper
-              status:
-                type: bool
-                example: true
-        Product:
-          type: array
-          items:
-            type: object
-            properties:
-              Nomorid:
-                type: int
-                example: 123
-              Name:
-                type: string
-                example: udin123
-              Description:
-                type: string
-                example: kamu knp?
-              Price:
-                type: int
-                example: 123
-              Size:
-                type: string
-                example: aku laper
-              Stock:
-                type: int
-                example: 123
-              Image:
-                type: string
-                example: aku laper
-              status:
-                type: bool
-                example: true
-        Status:
-          type: bool
-          example: true
-      Title: string
-      Description: string
-      Tanggal: string
-      Image: string
-      Harga: number
-      Content:
-        - id: number
-          Content: string
-          Image: string
-          Description: string
-          status: boolean
-      Product:
-        - Nomorid: number
-          Name: string
-          Description: string
-          Price: number
-          Size: string
-          Stock: number
-          Image: string
-          status: boolean
-      Status: boolean     
-    about:
-      type: object
-      properties:
-        id:
-          type: int
-          example: 123
-        Title:
-          type: string
-          example: udin123
-        Description:
-          type: string
-          example: kamu knp?
-        Tanggal:
-          type: string
-          example: aku laper
-        Image:
-          type: string
-          example: aku laper
-        Harga:
-          type: int
-          example: 123
-        Content:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: int
-                example: 123
-              Content:
-                type: string
-                example: udin123
-              Image:
-                type: string
-                example: kamu knp?
-              Description:
-                type: string
-                example: aku laper
-              status:
-                type: bool
-                example: true
-        Product:
-          type: array
-          items:
-            type: object
-            properties:
-              Nomorid:
-                type: int
-                example: 123
-              Name:
-                type: string
-                example: udin123
-              Description:
-                type: string
-                example: kamu knp?
-              Price:
-                type: int
-                example: 123
-              Size:
-                type: string
-                example: aku laper
-              Stock:
-                type: int
-                example: 123
-              Image:
-                type: string
-                example: aku laper
-              status:
-                type: bool
-                example: true
-        Status:
-          type: bool
-          example: true
-      Title: string
-      Description: string
-      Tanggal: string
-      Image: string
-      Harga: number
-      Content:
-        - id: number
-          Content: string
-          Image: string
-          Description: string
-          status: boolean
-      Product:
-        - Nomorid: number
-          Name: string
-          Description: string
-          Price: number
-          Size: string
-          Stock: number
-          Image: string
-          status: boolean
-      Status: boolean
-    AuthResponse:
-      type: object
+      required:
+        - status
+        - data
+        - message
       properties:
         status:
-          type: bool
-          example: false
+          type: boolean
+          description: status
+        data:
+          type: object
+          description: data
         message:
           type: string
-          example: fehguy
-        token:
-          type: string
-          example: fehguy
-    CreateComment:
+          description: message
+    createaccount:
       type: object
+      required:
+        - email
+        - password
+        - name
+        - role
       properties:
-        id:
-          type: int
-          example: 123
-        Username:
+        email:
           type: string
-          example: udin123
-        Comment:
+          format: email
+          description: email
+        password:
           type: string
-          example: kamu knp?
-        Answer:
+          format: password
+          description: password
+        name:
           type: string
-          example: aku gpp
-        Question:
+          description: name
+        role:
           type: string
-          example: aku laper
-        Tanggal:
-          type: string
-          example: "23-09-32"
-    product:
+          description: role
+    AuthResponse:
       type: object
+      required:
+        - email
+        - password
       properties:
-        Nomorid:
-          type: int
-          example: 123
-        Name:
+        email:
           type: string
-          example: udin123
-        Description:
+          format: email
+          description: email
+        password:
           type: string
-          example: kamu knp?
-        Price:
-          type: int
-          example: 123
-        Size:
-          type: string
-          example: aku laper
-        Stock:
-          type: int
-          example: 123
-        Image:
-          type: string
-          example: aku laper
-        Status:
-          type: bool
-          example: true
-    DeleteProduct:
+          format: password
+          description: password
+    Authlogin:
       type: object
+      required:
+        - email
+        - password
+        - name
+        - role
       properties:
-        nomorid:
-          type: int
-          example: 123
-    DeleteContent:
-      type: object
-      properties:
-        id:
-          type: int
-          example: 123
-    DeleteComment:
-      type: object
-      properties:
-        id:
-          type: int
-          example: 123
-    DeleteEventGlobal:
-      type: object
-      properties:
-        ID:
-          type: int
-          example: 123
-    content:
-      type: object
-      properties:
-        id:
-          type: int
-          example: 123
-        Content:
+        email:
           type: string
-          example: udin123
-        Image:
+          format: email
+          description: email
+        password:
           type: string
-          example: kamu knp?
-        Descriptopn:
-          type: int
-          example: 123
-        Status:
-          type: bool
-          example: true
-    tokenuser:
-          type: object
-          properties:
-            status:
-              type: bool
-              example: true
-            Message:
-              type: string
-              example: Berhasil decode token
-            username:
-              type: string
-              example: testing123              
-    AuthReq:
-      description: Request Authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Auth'
-    CreateEvent:
-      description: Request Authentication
-      eventglobal:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EventGlobal'
+          format: password
+          description: password
+        name:
+          type: string
+          description: name
+        role:
+          type: string
+          description: admin | user
     UserArray:
       description: List of user object
       content:
@@ -1120,6 +242,20 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/AuthResponse'
+    Auth:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          description: email
+        password:
+          type: string
+          format: password
+          description: password
   securitySchemes:
     token:
       type: apiKey
